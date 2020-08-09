@@ -12,7 +12,7 @@ ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION
 LABEL org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.name="YouTube to Podcast" \
+      org.label-schema.name="Internet Speed Monitor" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.vcs-url="https://github.com/vonProteus/InternetSpeedMonitor" \
       org.label-schema.version=$VERSION \
