@@ -1,7 +1,7 @@
 import os
 import re
 import subprocess
-import time
+from influxdb import InfluxDBClient
 
 response = subprocess.Popen('/usr/local/bin/speedtest-cli --simple', shell=True, stdout=subprocess.PIPE).stdout.read().decode('utf-8')
 
@@ -14,13 +14,28 @@ download = download[0].replace(',', '.')
 upload = upload[0].replace(',', '.')
 
 
-outputfile = os.environ["CSVOUTPUTFILE"]
+taghost = os.environ["TAGHOST"]
 
-try:
-    f = open(outputfile, 'a+')
-    if os.stat(outputfile).st_size == 0:
-        f.write('Date,Time,Ping (ms),Download (Mbit/s),Upload (Mbit/s)\r\n')
-except:
-    pass
+influxhost = os.environ["INFLUXHOST"]
+influxport = os.environ["INFLUXPORT"]
+influxuser = os.environ["INFLUXUSER"]
+influxpass = os.environ["INFLUXPASS"]
+influxdatabasename = os.environ["INFLUXDATABASENAME"]
 
-f.write('{},{},{},{},{}\r\n'.format(time.strftime('%Y-%m-%d'), time.strftime('%H:%M:%S'), ping, download, upload))
+speed_data = [
+        {
+            "measurement" : "internet_speed",
+            "tags" : {
+                "host": taghost
+                },
+            "fields" : {
+                "download": float(download),
+                "upload": float(upload),
+                "ping": float(ping)
+                }
+            }
+        ]
+
+client = InfluxDBClient(influxhost, influxport, influxuser, influxpass, influxdatabasename)
+
+client.write_points(speed_data)

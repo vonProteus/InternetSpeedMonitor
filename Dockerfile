@@ -1,6 +1,11 @@
 FROM python:3-alpine
 
-ENV CSVOUTPUTFILE=/tmp/speadfile.csv
+ENV TAGHOST=docker \
+	INFLUXHOST=influx \
+	INFLUXPORT=8086 \
+	INFLUXUSER=root \
+	INFLUXPASS=toor \
+	INFLUXDATABASENAME=db
 
 WORKDIR /app
 
