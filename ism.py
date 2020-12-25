@@ -27,8 +27,9 @@ speed_data = [
                 }
             }
         ]
-        
-print(speed_data)
+
+print(json.dumps(data, indent = 1))
+print(json.dumps(speed_data, indent = 1))
 
 client = InfluxDBClient(influxhost, influxport, influxuser, influxpass, influxdatabasename)
 
