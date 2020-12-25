@@ -4,7 +4,7 @@ import subprocess
 from influxdb import InfluxDBClient
 import json
 
-response = subprocess.Popen('/usr/local/bin/speedtest-cli --json --secure', shell=True, stdout=subprocess.PIPE).stdout.read().decode('utf-8')
+response = subprocess.Popen('speedtest -f json', shell=True, stdout=subprocess.PIPE).stdout.read().decode('utf-8')
 data = json.loads(response)
 
 taghost = os.environ["TAGHOST"]
@@ -21,9 +21,9 @@ speed_data = [
                 "host": taghost
                 },
             "fields" : {
-                "download" : data['download'],
-                "upload" : data['upload'],
-                "ping" : data['ping']
+                "download" : data['download']['bandwidth'],
+                "upload" : data['upload']['bandwidth'],
+                "ping" : data['ping']['latency']
                 }
             }
         ]
