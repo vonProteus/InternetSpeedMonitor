@@ -4,7 +4,7 @@ import subprocess
 from influxdb import InfluxDBClient
 import json
 
-response = subprocess.Popen('speedtest -f json', shell=True, stdout=subprocess.PIPE).stdout.read().decode('utf-8')
+response = subprocess.Popen('speedtest --accept-license --accept-gdpr -f json', shell=True, stdout=subprocess.PIPE).stdout.read().decode('utf-8')
 data = json.loads(response)
 
 taghost = os.environ["TAGHOST"]

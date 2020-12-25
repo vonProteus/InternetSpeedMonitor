@@ -27,8 +27,7 @@ RUN pip install --no-cache-dir -r requirements.txt && \
 	apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61 && \
 	echo "deb https://ookla.bintray.com/debian generic main" | tee /etc/apt/sources.list.d/speedtest.list && \
 	apt-get update && \
-	apt-get install -y speedtest && \
-	speedtest --accept-license --accept-gdpr -f json-pretty
+	apt-get install -y speedtest
 
 COPY . .
 
