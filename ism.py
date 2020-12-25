@@ -21,9 +21,9 @@ speed_data = [
                 "host": taghost
                 },
             "fields" : {
-                "download" : data['download']['bandwidth'],
-                "upload" : data['upload']['bandwidth'],
-                "ping" : data['ping']['latency']
+                "download" : float(data['download']['bandwidth']),
+                "upload" : float(data['upload']['bandwidth']),
+                "ping" : float(data['ping']['latency'])
                 }
             }
         ]
