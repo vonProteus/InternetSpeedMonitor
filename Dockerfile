@@ -22,10 +22,9 @@ WORKDIR /app
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt && \
-	apt-get update && \
-	apt-get install -y curl && \
+	apt-get update && apt-get install -y curl && \
 	curl -s https://install.speedtest.net/app/cli/install.deb.sh | bash && \
-	apt-get install -y speedtest
+	apt-get update && apt-get install -y speedtest
 
 COPY . .
 
