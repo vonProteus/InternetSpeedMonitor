@@ -23,10 +23,8 @@ WORKDIR /app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt && \
 	apt-get update && \
-	apt-get install -y gnupg1 apt-transport-https dirmngr && \
-	apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61 && \
-	echo "deb https://ookla.bintray.com/debian generic main" | tee /etc/apt/sources.list.d/speedtest.list && \
-	apt-get update && \
+	apt-get install -y curl && \
+	curl -s https://install.speedtest.net/app/cli/install.deb.sh | bash && \
 	apt-get install -y speedtest
 
 COPY . .
