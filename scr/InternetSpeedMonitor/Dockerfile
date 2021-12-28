@@ -27,6 +27,7 @@ COPY ["InternetSpeedMonitor/InternetSpeedMonitor.csproj", "InternetSpeedMonitor/
 RUN dotnet restore "InternetSpeedMonitor/InternetSpeedMonitor.csproj"
 COPY . .
 WORKDIR "/src/InternetSpeedMonitor"
+RUN apt-get update && apt-get install -y tree && tree -alh
 RUN dotnet build "InternetSpeedMonitor.csproj" -c Release -o /app/build
 
 FROM build AS publish
