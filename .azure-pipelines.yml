@@ -37,5 +37,6 @@ steps:
             -t $(DOCKER_REPOSITORIE):v.${VERSIONARRAY[0]}.${VERSIONARRAY[1]} \
             -t $(DOCKER_REPOSITORIE):v.${VERSIONARRAY[0]} \
             --push \
-            .
+            --file=scr/InternetSpeedMonitor/Dockerfile \
+            scr/InternetSpeedMonitor/.
   displayName: 'docker buildx & push'

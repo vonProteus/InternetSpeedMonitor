@@ -1,26 +1,28 @@
 version: '3.4'
 services:
   ism:
-    image: vonproteus/internet-speed-monitor
+    build:
+      context: ./scr/InternetSpeedMonitor/
+      dockerfile: Dockerfile
     environment:
-      - INFLUXDATABASENAME=ism
+      - TAGHOST=docker
+      - DB_HOST=db:5432
+      - DB_USER=ism
+      - DB_PASSWORD=ism 
+      - DB_NAME=ism
+      
+  db:
+    image: postgres:14
+    volumes:
+    - ./db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=ism
+      - POSTGRES_PASSWORD=ism
+      - POSTGRES_DB=ism
+    ports:
+      - 5333:5432
     deploy:
-      mode: replicated
       replicas: 1
       restart_policy:
-        condition: any
-        delay: 31m
-
-
-
-  influx:
-    image: influxdb
-    volumes:
-    - data:/var/lib/influxdb 
-    environment:
-    - INFLUXDB_WRITE_USER=root
-    - INFLUXDB_WRITE_USER_PASSWORD=toor
-    - INFLUXDB_DB=ism
-
-volumes:
-  data:
+        condition: on-failure
+        delay: 5s
