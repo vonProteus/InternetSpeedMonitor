@@ -24,11 +24,9 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["InternetSpeedMonitor/InternetSpeedMonitor.csproj", "InternetSpeedMonitor/"]
-RUN apt-get update && apt-get install -y tree && tree -alh
 RUN dotnet restore "InternetSpeedMonitor/InternetSpeedMonitor.csproj"
 COPY . .
 WORKDIR "/src/InternetSpeedMonitor"
-RUN apt-get update && apt-get install -y tree && tree -alh
 RUN dotnet build "InternetSpeedMonitor.csproj" -c Release -o /app/build
 
 FROM build AS publish
