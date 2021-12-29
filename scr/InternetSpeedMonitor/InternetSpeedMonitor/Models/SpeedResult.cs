@@ -7,7 +7,7 @@ public class SpeedResult
 	public int Download { get; set; }
 	public int Upload { get; set; }
 	public DateTime Timestamp { get; set; }
-	public TimeSpan Ping { get; set; }
+	public double Ping { get; set; }
 	public string URL { get; set; }
 	public string RawJson { get; set; }
 }

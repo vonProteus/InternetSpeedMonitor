@@ -21,7 +21,7 @@ public class SpeedTest
 		{
 			Download = json["download"]["bandwidth"].GetValue<int>() * 8,
 			Upload = json["upload"]["bandwidth"].GetValue<int>() * 8,
-			Ping = TimeSpan.FromMilliseconds(json["ping"]["latency"].GetValue<double>()),
+			Ping = json["ping"]["latency"].GetValue<double>(),
 			Timestamp = DateTime.Parse(json["timestamp"].ToString()).ToUniversalTime(),
 			URL = json["result"]["url"].ToString(),
 			RawJson = speedTestRawJson
